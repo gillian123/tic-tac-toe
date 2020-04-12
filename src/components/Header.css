@@ -1,0 +1,12 @@
+.header {
+    color: white;
+    text-align: center;
+}
+
+.header>h1 {
+    font-size: 3rem;
+}
+
+.header>h3 {
+    font-size: 1.3rem;
+}

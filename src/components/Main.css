@@ -1,0 +1,50 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+}
+
+.main>.info {
+    color: #fff;
+    width: fit-content;
+}
+
+.main>.board {
+    width: 520px;
+    height: 520px;
+}
+
+.square {
+    width: calc(100%/3);
+    height: calc(100%/3);
+    border: 3px solid #fff;
+    background-color: transparent;
+}
+
+.main>.board>.square.square-0,
+.main>.board>.square.square-1,
+.main>.board>.square.square-2 {
+    border-top: none;
+}
+
+.main>.board>.square.square-0,
+.main>.board>.square.square-3,
+.main>.board>.square.square-6 {
+    border-left: none;
+}
+
+.main>.board>.square.square-6,
+.main>.board>.square.square-7,
+.main>.board>.square.square-8 {
+    border-bottom: none;
+}
+
+.main>.board>.square.square-2,
+.main>.board>.square.square-5,
+.main>.board>.square.square-8 {
+    border-right: none;
+}
