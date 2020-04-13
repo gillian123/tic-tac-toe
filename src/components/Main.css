@@ -23,6 +23,11 @@
     height: calc(100%/3);
     border: 3px solid #fff;
     background-color: transparent;
+    font-size: 5rem;
+}
+
+.main>.board>.square:not(.empty) {
+    color: #fff;
 }
 
 .main>.board>.square.square-0,

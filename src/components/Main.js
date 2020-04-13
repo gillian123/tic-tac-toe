@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { AppContext } from '../AppProvider';
+import { ICON_CHARS } from '../common';
 import './Main.css';
+
+const ICON_PLACEHOLDER = 'I';
 
 const Square = (props) => {
     return (
         <AppContext.Consumer>
             { context => {
+                const value = context.squares[props.index];
+                const icon = value === null ? ICON_PLACEHOLDER : ICON_CHARS[value];
+                const isEmpty = icon === ICON_PLACEHOLDER ? 'empty' : '';
                 return (
-                    <button className={`square square-${props.index}`}>
-                        I
+                    <button className={`square square-${props.index} ${isEmpty}`}>
+                        {icon}
                     </button>
                 )
             }}
