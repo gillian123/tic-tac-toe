@@ -52,6 +52,9 @@ export const checkGameState = (squares) => {
     }
 }
 
+/**
+ * Random move when computer starts game
+ */
 export const findRandomMove = (squares) => {
     const emptySquares = getEmptySquares(squares);
     if (emptySquares.length > 0) {
@@ -61,3 +64,79 @@ export const findRandomMove = (squares) => {
     }
     return null;
 }
+
+/**
+ * Use Minimax algorithm to find best move
+ */
+ export const findBestMove = (squares, playerTurn) => {
+     let bestVal = -1000;
+     let bestMove = null;
+
+     for (let i=0; i<squares.length; i++) {
+         if (squares[i] === null) {
+             const nextSquares = replace(squares, i, playerTurn);
+             const moveVal = minimax(nextSquares, 0, playerTurn, false);
+             if (moveVal > bestVal) {
+                 bestVal = moveVal;
+                 bestMove = i;
+             }
+         }
+     }
+     return bestMove;
+ }
+
+ const minimax = (squares, depth, playerTurn, isMax) => {
+     const score = getScore(squares, playerTurn);
+
+     // If maximizer won
+     if (score === 10) { return score - depth; }
+     // If minimizer won
+     if (score === -10) { return score + depth; }
+     // If tie
+     if (isTie(squares)) { return 0; }
+
+     let bestVal;
+     if (isMax) {
+        bestVal = -1000;
+        for (let i=0; i<squares.length; i++) {
+            if (squares[i] === null) {
+                const nextSquares = replace(squares, i, playerTurn);
+                bestVal = Math.max(bestVal, minimax(nextSquares, depth+1, playerTurn, !isMax));
+            }
+        }
+     } else {
+        bestVal = 1000;
+        for (let i=0; i<squares.length; i++) {
+            if (squares[i] === null) {
+                const nextSquares = replace(squares, i, 1-playerTurn);
+                bestVal = Math.min(bestVal, minimax(nextSquares, depth+1, playerTurn, !isMax));
+            }
+        }
+     }
+     return bestVal;
+ }
+
+ const getScore = (squares, playerTurn) => {
+    const lines = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6]
+    ];
+
+    for (let i=0; i<lines.length; i++) {
+        const [a,b,c] = lines[i];
+        if (squares[a] !== null && squares[a] === squares[b] && squares[a] === squares[c]) {
+            if (squares[a] === playerTurn) {
+                return 10;
+            } else {
+                return -10;
+            }
+        }
+    }
+    return 0;
+ }

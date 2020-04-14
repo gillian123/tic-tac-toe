@@ -13,7 +13,8 @@ const Square = (props) => {
                 const icon = value === null ? ICON_PLACEHOLDER : ICON_CHARS[value];
                 const isEmpty = icon === ICON_PLACEHOLDER ? 'empty' : '';
                 return (
-                    <button className={`square square-${props.index} ${isEmpty}`}>
+                    <button className={`square square-${props.index} ${isEmpty}`}
+                            onClick={() => context.humanPlay(props.index)}>
                         {icon}
                     </button>
                 )
