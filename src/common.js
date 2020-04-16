@@ -46,10 +46,13 @@ export const checkGameState = (squares) => {
     for (let i=0; i<lines.length; i++) {
         const[a,b,c] = lines[i];
         if (squares[a] !== null && squares[a] === squares[b] && squares[a] === squares[c]) {
-            return squares[a];
+            return {
+                status: squares[a],
+                winningSquares: [a,b,c]
+            }
         }
-        return isTie(squares) ? 2 : 3;
     }
+    return { status: isTie(squares) ? 2 : 3 }
 }
 
 /**
@@ -61,42 +64,40 @@ export const findRandomMove = (squares) => {
         const randomNum = getRandom(0, emptySquares.length);
         const index = emptySquares[randomNum][1];
         return index;
-    }
-    return null;
+    } return null;
 }
 
 /**
  * Use Minimax algorithm to find best move
  */
- export const findBestMove = (squares, playerTurn) => {
-     let bestVal = -1000;
-     let bestMove = null;
+export const findBestMove = (squares, playerTurn) => {
+    let bestVal = -1000;
+    let bestMove = null;
 
-     for (let i=0; i<squares.length; i++) {
-         if (squares[i] === null) {
-             const nextSquares = replace(squares, i, playerTurn);
-             const moveVal = minimax(nextSquares, 0, playerTurn, false);
-             if (moveVal > bestVal) {
-                 bestVal = moveVal;
-                 bestMove = i;
-             }
-         }
-     }
-     return bestMove;
- }
+    for (let i=0; i<squares.length; i++) {
+        if (squares[i] === null) {
+            const nextSquares = replace(squares, i, playerTurn);
+            const moveVal = minimax(nextSquares, 0, playerTurn, false);
+            if (moveVal > bestVal) {
+                bestVal = moveVal;
+                bestMove = i;
+            }
+        }
+    } return bestMove;
+}
 
- const minimax = (squares, depth, playerTurn, isMax) => {
-     const score = getScore(squares, playerTurn);
+const minimax = (squares, depth, playerTurn, isMax) => {
+    const score = getScore(squares, playerTurn);
 
-     // If maximizer won
-     if (score === 10) { return score - depth; }
-     // If minimizer won
-     if (score === -10) { return score + depth; }
-     // If tie
-     if (isTie(squares)) { return 0; }
+    // If maximizer won
+    if (score === 10) { return score - depth; }
+    // If minimizer won
+    if (score === -10) { return score + depth; }
+    // If tie
+    if (isTie(squares)) { return 0; }
 
-     let bestVal;
-     if (isMax) {
+    let bestVal;
+    if (isMax) {
         bestVal = -1000;
         for (let i=0; i<squares.length; i++) {
             if (squares[i] === null) {
@@ -104,7 +105,7 @@ export const findRandomMove = (squares) => {
                 bestVal = Math.max(bestVal, minimax(nextSquares, depth+1, playerTurn, !isMax));
             }
         }
-     } else {
+    } else {
         bestVal = 1000;
         for (let i=0; i<squares.length; i++) {
             if (squares[i] === null) {
@@ -112,11 +113,10 @@ export const findRandomMove = (squares) => {
                 bestVal = Math.min(bestVal, minimax(nextSquares, depth+1, playerTurn, !isMax));
             }
         }
-     }
-     return bestVal;
- }
+    } return bestVal;
+}
 
- const getScore = (squares, playerTurn) => {
+const getScore = (squares, playerTurn) => {
     const lines = [
         [0,1,2],
         [3,4,5],
@@ -137,6 +137,5 @@ export const findRandomMove = (squares) => {
                 return -10;
             }
         }
-    }
-    return 0;
- }
+    } return 0;
+}

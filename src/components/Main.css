@@ -1,21 +1,19 @@
 .main {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    width: fit-content;
-    height: fit-content;
-    margin: auto;
 }
 
 .main>.info {
     color: #fff;
     width: fit-content;
+    padding: 30px 0;
+    font-size: 1.5rem;
 }
 
 .main>.board {
-    width: 520px;
-    height: 520px;
+    width: 500px;
+    height: 500px;
 }
 
 .square {
@@ -24,10 +22,66 @@
     border: 3px solid #fff;
     background-color: transparent;
     font-size: 5rem;
+    line-height: 5.7rem;
+    outline: none;
+}
+
+.main>.board>.square.empty {
+    cursor: pointer;
 }
 
 .main>.board>.square:not(.empty) {
     color: #fff;
+}
+
+.main>.board.end>.square {
+    cursor: default;
+}
+
+.main>.board.end>.square:not(.empty):not(.win) {
+    color: grey;
+}
+
+.main>.board.end>.square.win>.icon {
+  animation: blinker 0.75s linear 3;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.main>.board.end.tie>.square {
+  animation: borderBlink 1s linear 2;
+}
+
+@keyframes borderBlink {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #fff;
+  }
+}
+
+.main>.newGame {
+    background-color: transparent;
+    height: 500px;
+    width: 500px;
+    position: absolute;
+    padding: 0;
+    display: none;
+    border: none;
+    cursor: pointer;
+}
+
+.main>.newGame:focus {
+    outline: none;
+}
+
+.main>.newGame.end {
+    display: block;
 }
 
 .main>.board>.square.square-0,
@@ -53,3 +107,29 @@
 .main>.board>.square.square-8 {
     border-right: none;
 }
+
+/**
+
+@media (max-width: 1400px) {
+  .main {
+    padding: 0px 120px;
+  }
+  .main>.info {
+    padding: 20px 0;
+    font-size: 1.2rem;
+  }
+  .main>.board>.board-row>.cell {
+    padding-top: calc(100% / 6 - 1.7rem);
+    padding-bottom: calc(100% / 6 - 1.7rem);
+    font-size: 3rem;
+    line-height: 3.3rem;
+  }
+}
+
+@media (max-width: 575px) {
+  .main {
+    padding: 0px 50px;
+  }
+}
+
+*/

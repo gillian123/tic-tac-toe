@@ -3,22 +3,25 @@ import { PLAYER_TURNS, findRandomMove, GAME_STATES,
          replace, checkGameState, findBestMove } from './common';
 
 const THINKING_TIME = 500;
-let PLAYER_START = 0;
 export const AppContext = React.createContext();
 
 export default class AppProvider extends Component {
 
     initState = {
         squares: new Array(9).fill(null),
-        playerTurn: PLAYER_START,
-        gameState: GAME_STATES.CONTINUE
+        playerTurn: 0,
+        gameState: {
+            status: GAME_STATES.CONTINUE,
+            winningSquares: new Array(3).fill(null)
+        }
     }
 
     state = {
         squares: this.initState.squares,
         playerTurn: this.initState.playerTurn,
         gameState: this.initState.gameState,
-        humanPlay: (index) => { this.humanPlay(index); }
+        humanPlay: (index) => { this.humanPlay(index); },
+        newGame: () => { this.initNewGame(); }
     }
 
     initGame = () => {
@@ -28,6 +31,19 @@ export default class AppProvider extends Component {
                 this.computerPlay(randomMove);
             }, THINKING_TIME);
         }
+    }
+
+    initNewGame = () => {
+        this.setState(() => {
+            return {
+                squares: this.initState.squares,
+                gameState: this.initState.gameState,
+                playerTurn: 1 - this.initState.playerTurn
+            }
+        }, () => {
+            this.initState.playerTurn = 1 - this.initState.playerTurn;
+            this.initGame();
+        })
     }
 
     applyState = (prevState, index) => {
@@ -43,19 +59,19 @@ export default class AppProvider extends Component {
     }
 
     computerPlay = (index) => {
-        if (this.state.gameState === GAME_STATES.CONTINUE && this.state.squares[index] === null 
+        if (this.state.gameState.status === GAME_STATES.CONTINUE && this.state.squares[index] === null 
             && this.state.playerTurn === PLAYER_TURNS.COMPUTER) {
             this.setState(prevState => this.applyState(prevState, index));
         }
     }
 
     humanPlay = (index) => {
-        if (this.state.gameState === GAME_STATES.CONTINUE && this.state.squares[index] === null
+        if (this.state.gameState.status === GAME_STATES.CONTINUE && this.state.squares[index] === null
             && this.state.playerTurn === PLAYER_TURNS.HUMAN) {
             this.setState(prevState => { 
                 return this.applyState(prevState, index); 
             }, () => {
-                if (this.state.gameState === GAME_STATES.CONTINUE 
+                if (this.state.gameState.status === GAME_STATES.CONTINUE 
                     && this.state.playerTurn === PLAYER_TURNS.COMPUTER) {
                     setTimeout(() => {
                         this.makeAIMove();
