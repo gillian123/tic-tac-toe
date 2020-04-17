@@ -124,7 +124,7 @@
 
 @media only screen and (max-width: 500px) {
   .main>.board {
-    width: 70%;
+    width: 95%;
   }
   .main>.info {
     margin: 20px 0;
