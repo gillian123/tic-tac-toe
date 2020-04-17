@@ -9,7 +9,7 @@ export default class AppProvider extends Component {
 
     initState = {
         squares: new Array(9).fill(null),
-        playerTurn: 0,
+        playerTurn: 1,
         gameState: {
             status: GAME_STATES.CONTINUE,
             winningSquares: new Array(3).fill(null)
