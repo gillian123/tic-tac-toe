@@ -124,8 +124,8 @@
 
 @media only screen and (max-width: 500px) {
   .main>.board {
-    width: 250px;
-    height: 250px;
+    width: 150px;
+    height: 150px;
   }
   .main>.info {
     margin: 20px 0;
@@ -133,6 +133,6 @@
   }
   .main>.board>.square {
     border: 1.5px solid #fff;
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 }
