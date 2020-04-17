@@ -7,22 +7,21 @@
 .main>.info {
     color: #fff;
     width: fit-content;
-    padding: 30px 0;
-    font-size: 1.5rem;
+    margin: 30px 0;
+    font-size: 1.3rem;
 }
 
 .main>.board {
-    width: 500px;
-    height: 500px;
+    width: 450px;
+    height: 450px;
 }
 
-.square {
+.main>.board>.square {
     width: calc(100%/3);
     height: calc(100%/3);
     border: 3px solid #fff;
     background-color: transparent;
     font-size: 5rem;
-    line-height: 5.7rem;
     outline: none;
 }
 
@@ -39,7 +38,7 @@
 }
 
 .main>.board.end>.square:not(.empty):not(.win) {
-    color: grey;
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .main>.board.end>.square.win>.icon {
@@ -108,28 +107,17 @@
     border-right: none;
 }
 
-/**
-
 @media (max-width: 1400px) {
-  .main {
-    padding: 0px 120px;
+  .main>.board {
+    width: 350px;
+    height: 350px;
   }
   .main>.info {
-    padding: 20px 0;
+    margin: 20px 0;
     font-size: 1.2rem;
   }
-  .main>.board>.board-row>.cell {
-    padding-top: calc(100% / 6 - 1.7rem);
-    padding-bottom: calc(100% / 6 - 1.7rem);
-    font-size: 3rem;
-    line-height: 3.3rem;
+  .main>.board>.square {
+    border: 2px solid #fff;
+    font-size: 4rem;
   }
 }
-
-@media (max-width: 575px) {
-  .main {
-    padding: 0px 50px;
-  }
-}
-
-*/

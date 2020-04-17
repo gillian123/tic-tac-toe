@@ -1,15 +1,10 @@
 .app {
     width: 100%;
-    max-width: 640px;
-    min-width: 360px;
     margin: 50px auto;
 }
 
-/**
-
 @media (max-width: 1400px) {
     .app {
-        max-width: 500px;
         margin: 20px auto;
     }
 }
@@ -19,5 +14,3 @@
         margin-top: 0px;
     }
 }
-
-*/

@@ -1,12 +1,21 @@
 .header {
     color: white;
     text-align: center;
+    margin: 50px auto;
 }
 
 .header>h1 {
     font-size: 3rem;
+    margin: 0;
 }
 
 .header>h3 {
+    margin: 10px;
     font-size: 1.3rem;
+}
+
+@media (max-width: 1400px) {
+    .header {
+        margin: 40px auto;
+    }
 }
