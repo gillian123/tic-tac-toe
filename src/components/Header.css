@@ -20,7 +20,7 @@
     }
 }
 
-@media (max-width: 500px) {
+@media only screen and (max-width: 500px) {
     .header {
         margin: 20px auto;
     }
