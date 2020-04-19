@@ -66,8 +66,8 @@
 
 .main>.newGame {
     background-color: transparent;
-    height: 500px;
-    width: 500px;
+    height: 450px;
+    width: 450px;
     position: absolute;
     padding: 0;
     display: none;
@@ -112,6 +112,10 @@
     width: 350px;
     height: 350px;
   }
+  .main>.newGame {
+    width: 350px;
+    height: 350px;
+  }
   .main>.info {
     margin: 20px 0;
     font-size: 1.2rem;
@@ -124,7 +128,10 @@
 
 @media only screen and (max-width: 500px) {
   .main>.board {
-    width: 95%;
+    width: 90%;
+  }
+  .main>.newGame {
+    width: 90%;
   }
   .main>.info {
     margin: 20px 0;
